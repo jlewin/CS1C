@@ -12,6 +12,7 @@ class cardDeckType
         cardDeckType();
         void shuffle();
         cardType* getCards();
+        void printDeck();
 
     private:
         static const int TOTAL_CARDS = 52;
