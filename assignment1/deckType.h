@@ -11,7 +11,6 @@ class deckType
     public:
         deckType();
         void shuffle();
-        cardType* getCards();
         void printDeck();
 
     private:
@@ -19,4 +18,5 @@ class deckType
         cardType cards[TOTAL_CARDS];
 
 };
+
 #endif

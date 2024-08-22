@@ -52,10 +52,6 @@ void deckType::shuffle() {
     }
 }
 
-cardType* deckType::getCards() {
-    return cards;
-}
-
 void deckType::printDeck() {
     for (int i = 0; i < TOTAL_CARDS; i++) {
         cout << cards[i].toString() << endl;
