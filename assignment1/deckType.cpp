@@ -6,32 +6,17 @@ using namespace std;
 
 deckType::deckType() {
     cout << "deckType constructor" << endl;
-    const int RANK_COUNT = 13;
-    const int SUIT_COUNT = 4;
+    
+    const int rankCount = cardType::RANK_COUNT;
 
-    string ranks[RANK_COUNT] = {"Ace", "2", "3", "4", "5", "6", "7",
-                            "8", "9", "10", "Jack", "Queen", "King"};
-
-    string suits[SUIT_COUNT] = {"Clubs", "Diamonds", "Spades", "Hearts"};
+    int cardIndex = 0;
 
     // Iterate over suits, creating a card for each rank in the suit
-    for (int i = 0; i < SUIT_COUNT; i++) {
-        string suit = suits[i];
+    for (int suitIndex = 0; suitIndex < cardType::SUIT_COUNT; suitIndex++) {
         // Create a card for each rank in the suit
-        for (int j = 0; j < RANK_COUNT; j++) {
-            string rank = ranks[j];
-            int card_value;
-            if (rank == "Ace") {
-                card_value = 11;
-            } else if (j >= 9) {
-                card_value = 10;
-            } else {
-                card_value = j + 1; //stoi(rank);
-            }
-
-            // Reference and init the updated card
-            cardType &card = cards[i * RANK_COUNT + j];
-            card.initCard(rank, suit, card_value);
+        for (int rankIndex = 0; rankIndex < rankCount; rankIndex++) {
+            // Init the card
+            cards[cardIndex++].initCard(suitIndex, rankIndex);
         }
     }
 }
@@ -53,7 +38,13 @@ void deckType::shuffle() {
 }
 
 void deckType::printDeck() {
+
+    bool concise = true;
+    string separator = concise ? ", " : "\n";
+
     for (int i = 0; i < TOTAL_CARDS; i++) {
-        cout << cards[i].toString() << endl;
+        cout << cards[i].toString(concise) << (i < TOTAL_CARDS -1 ? separator : "");
     }
+
+    cout << endl;
 }

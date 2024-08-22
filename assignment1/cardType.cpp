@@ -3,17 +3,38 @@
 
 using namespace std;
 
+int cardType::instanceCount = 0;
+
+const string cardType::ranks[cardType::RANK_COUNT] = {"Ace", "2", "3", "4", "5", "6", "7",
+                            "8", "9", "10", "Jack", "Queen", "King"};
+
+const suitType cardType::suits[cardType::SUIT_COUNT] = { 
+    {"Clubs", "♣"},
+    {"Diamonds", "♦"},
+    {"Hearts", "♥" },
+    {"Spades", "♠"}
+};
+
 cardType::cardType() {
-    cout << "cardType constructor" << endl;
-    rank = "";
-    suit = "";
+    // dbg instances
+    //cout << "cardType constructor (" << instanceCount++ << ")" << endl;
     cardValue = 0;
 }
 
-void cardType::initCard(string rank, string suit, int value) {
-    this->rank = rank;
-    this->suit = suit;
-    this->cardValue = value;
+void cardType::initCard(int suitIndex, int rankIndex) {
+    this->suit = cardType::suits[suitIndex];
+    this->rank = cardType::ranks[rankIndex];
+
+    int cardValue;
+    if (this->rank == "Ace") {
+        cardValue = 11;
+    } else if (rankIndex >= 9) {
+        cardValue = 10;
+    } else {
+        cardValue = rankIndex + 1; //stoi(rank);
+    }
+
+    this->cardValue = cardValue;
 }
 
 // Read only getters {{
@@ -22,14 +43,18 @@ string cardType::getRank() const {
 }
 
 string cardType::getSuit() const {
-    return suit;
+    return suit.name;
 }   
 
 int cardType::getValue() const {
     return cardValue;
 }
 
-string cardType::toString() const {
-    return rank + " of " + suit + " (" + to_string(cardValue) + ")";
+string cardType::toString(bool concise) const {
+    if (concise) {
+        return rank.substr(0, 1) + suit.symbol;
+    } else {
+        return rank + " of " + suit.name + " (" + to_string(cardValue) + ")";
+    }
 }   
 // }} 
