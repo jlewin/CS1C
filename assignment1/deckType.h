@@ -6,10 +6,10 @@
 
 using namespace std;
 
-class cardDeckType
+class deckType
 {
     public:
-        cardDeckType();
+        deckType();
         void shuffle();
         cardType* getCards();
         void printDeck();

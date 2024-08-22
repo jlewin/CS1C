@@ -25,7 +25,7 @@
         },
         {
             "type": "cppbuild",
-            "label": "buildA30",
+            "label": "buildA1",
             "command": "/usr/bin/g++",
             "args": [
                 "-g",
@@ -34,13 +34,14 @@
                 "-Wall",
                 "-Wextra",
                 "-Werror",
-                "deck.cpp",
+                "main.cpp",
+                "deckType.cpp",
                 "cardType.cpp",
                 "-o",
-                "${workspaceFolder}/gah"
+                "${workspaceFolder}/dist/assignment1"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}/assignment1"
             },
             "problemMatcher": [
                 "$gcc"

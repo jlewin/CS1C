@@ -5,16 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Dbg A30",
+            "name": "Dbg A1",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/gah",
+            "program": "${workspaceFolder}/dist/assignment1",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/assignment1",
             "environment": [],
             "externalConsole": false,
-            "preLaunchTask": "buildA30",
+            "preLaunchTask": "buildA1",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

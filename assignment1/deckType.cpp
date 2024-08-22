@@ -1,27 +1,11 @@
 #include <iostream>
-#include "deck.h"
+#include "deckType.h"
 #include "cardType.h"
 
 using namespace std;
 
-
-int main()
-{
-    // Construct a deck
-    cardDeckType deck = cardDeckType();
-    deck.printDeck();
-
-    // Shuffle the deck
-    deck.shuffle();
-    deck.printDeck();
-
-    return 0;
-}
-
-
-cardDeckType::cardDeckType() {
-
-    cout << "cardDeckType constructor" << endl;
+deckType::deckType() {
+    cout << "deckType constructor" << endl;
     const int RANK_COUNT = 13;
     const int SUIT_COUNT = 4;
 
@@ -45,24 +29,15 @@ cardDeckType::cardDeckType() {
                 card_value = j + 1; //stoi(rank);
             }
 
-            // Reference, init, and print the updated card
+            // Reference and init the updated card
             cardType &card = cards[i * RANK_COUNT + j];
             card.initCard(rank, suit, card_value);
-            //cout << card.toString() << endl;
         }
-        //cout << "----------------" << endl;
     }
 }
 
-void cardDeckType::shuffle() {
+void deckType::shuffle() {
     int midPoint = TOTAL_CARDS / 2;
-
-    cout << "----------------------- midpoint ? --------------------------------" << endl;
-
-    // Print the first card at the midpoint
-    cout << cards[midPoint].toString() << endl;
-    cout << "----------------------- ??? --------------------------------" << endl;
-
     int upperIndex = midPoint;
 
     for (int lowerIndex = 1; lowerIndex <= midPoint; lowerIndex += 2) {
@@ -77,11 +52,11 @@ void cardDeckType::shuffle() {
     }
 }
 
-cardType* cardDeckType::getCards() {
+cardType* deckType::getCards() {
     return cards;
 }
 
-void cardDeckType::printDeck() {
+void deckType::printDeck() {
     for (int i = 0; i < TOTAL_CARDS; i++) {
         cout << cards[i].toString() << endl;
     }
