@@ -24,6 +24,7 @@ int main()
         }
     }
 
+    cout << "\n✱ Eight perfect shuffles are needed to arrive back at the initial deck." << endl;
     cout << endl;
     return 0;
 }
