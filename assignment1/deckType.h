@@ -12,9 +12,9 @@ class deckType
         deckType();
         void shuffle();
         void printDeck();
+        static const int TOTAL_CARDS = 52;
 
     private:
-        static const int TOTAL_CARDS = 52;
         cardType cards[TOTAL_CARDS];
 
 };

@@ -8,18 +8,22 @@ int main()
     // Construct a deck
     deckType deck = deckType();
 
-    cout << endl;
-    
-    // Print out the intial deck
+    // Print out the initial deck
+    cout << "\nInitial Deck" << endl;
     deck.printDeck();
 
-    // Shuffle the deck
-    deck.shuffle();
+    // Shuffle the required number of time to arrive at the original deck, printing
+    // out the first and last shuffles
+    for (int i = 0; i < 8; i++) {
+        deck.shuffle();
 
-    // Print out the shuffled deck
-    deck.printDeck();
+        if (i == 0 || i == 7) {
+            // Print out the shuffled deck
+            cout << "Sort #" << i + 1 << endl;
+            deck.printDeck();
+        }
+    }
 
     cout << endl;
-
     return 0;
 }
