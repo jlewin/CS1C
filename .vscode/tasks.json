@@ -35,8 +35,8 @@
                 "-Wextra",
                 "-Werror",
                 "main.cpp",
-                "deckType.cpp",
-                "cardType.cpp",
+                "Deck.cpp",
+                "Card.cpp",
                 "-o",
                 "${workspaceFolder}/dist/assignment1"
             ],

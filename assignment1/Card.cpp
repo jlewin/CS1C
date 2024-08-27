@@ -1,30 +1,30 @@
 #include <iostream>
-#include "cardType.h"
+#include "Card.h"
 #include <sstream>
 
 using namespace std;
 
-int cardType::instanceCount = 0;
+int Card::instanceCount = 0;
 
-const string cardType::ranks[cardType::RANK_COUNT] = {"Ace", "2", "3", "4", "5", "6", "7",
+const string Card::ranks[Card::RANK_COUNT] = {"Ace", "2", "3", "4", "5", "6", "7",
                             "8", "9", "10", "Jack", "Queen", "King"};
 
-const suitType cardType::suits[cardType::SUIT_COUNT] = { 
+const Suit Card::suits[Card::SUIT_COUNT] = { 
     {"Hearts", "♥" },
     {"Clubs", "♣"},
     {"Diamonds", "♦"},
     {"Spades", "♠"}
 };
 
-cardType::cardType() {
+Card::Card() {
     // dbg instances
     //cout << "cardType constructor (" << instanceCount++ << ")" << endl;
     cardValue = 0;
 }
 
-void cardType::initCard(int suitIndex, int rankIndex) {
-    this->suit = cardType::suits[suitIndex];
-    this->rank = cardType::ranks[rankIndex];
+void Card::initCard(int suitIndex, int rankIndex) {
+    this->suit = Card::suits[suitIndex];
+    this->rank = Card::ranks[rankIndex];
 
     int cardValue;
     if (this->rank == "Ace") {
@@ -39,19 +39,19 @@ void cardType::initCard(int suitIndex, int rankIndex) {
 }
 
 // Read only getters {{
-string cardType::getRank() const {
+string Card::getRank() const {
     return rank;
 }
 
-string cardType::getSuit() const {
+string Card::getSuit() const {
     return suit.name;
 }   
 
-int cardType::getValue() const {
+int Card::getValue() const {
     return cardValue;
 }
 
-string cardType::toString(bool concise) const {
+string Card::toString(bool concise) const {
     if (concise) {
         int color = 0;
         if (suit.name == "Hearts" || suit.name == "Diamonds") {

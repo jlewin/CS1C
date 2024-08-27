@@ -1,12 +1,12 @@
 #include <iostream>
-#include "deckType.h"
+#include "Deck.h"
 
 using namespace std;
 
 int main()
 {
     // Construct a deck
-    deckType deck = deckType();
+    Deck deck;
 
     // Print out the initial deck
     cout << "\nInitial Deck" << endl;

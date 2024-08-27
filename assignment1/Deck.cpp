@@ -1,28 +1,28 @@
 #include <iostream>
-#include "deckType.h"
-#include "cardType.h"
+#include "Deck.h"
+#include "Card.h"
 
 using namespace std;
 
-deckType::deckType() {
+Deck::Deck() {
     //cout << "deckType constructor" << endl;
     int cardIndex = 0;
 
     // Iterate over suits, creating a card for each rank in the suit
-    for (int suitIndex = 0; suitIndex < cardType::SUIT_COUNT; suitIndex++) {
+    for (int suitIndex = 0; suitIndex < Card::SUIT_COUNT; suitIndex++) {
         // Create a card for each rank in the suit
-        for (int rankIndex = 0; rankIndex < cardType::RANK_COUNT; rankIndex++) {
+        for (int rankIndex = 0; rankIndex < Card::RANK_COUNT; rankIndex++) {
             // Init the card
             cards[cardIndex++].initCard(suitIndex, rankIndex);
         }
     }
 }
 
-void deckType::shuffle() {
+void Deck::shuffle() {
     int midPoint = TOTAL_CARDS / 2;
     int upperIndex = midPoint;
 
-    cardType shuffled[TOTAL_CARDS];
+    Card shuffled[TOTAL_CARDS];
 
     int i = 0;
 
@@ -39,7 +39,7 @@ void deckType::shuffle() {
     }
 }
 
-void deckType::printDeck() {
+void Deck::printDeck() {
     bool border = true;
     bool concise = true;
     string separator = concise ? (border ? "│" : "┊") : "\n";

@@ -1,20 +1,20 @@
-#ifndef H_CardType
-#define H_CardType
+#ifndef Card_H
+#define Card_H
 
 #include <iostream>
 
 using namespace std;
 
-struct suitType
+struct Suit
 {
     string name;
     string symbol;
 };
 
-class cardType
+class Card
 {
     public:
-        cardType();
+        Card();
         void initCard(int suitIndex, int rankIndex);
         string getRank() const; 
         string getSuit() const;
@@ -25,12 +25,12 @@ class cardType
         static const int SUIT_COUNT = 4;
 
         static const string ranks[RANK_COUNT];
-        static const suitType suits[SUIT_COUNT];
+        static const Suit suits[SUIT_COUNT];
         static int instanceCount;
 
     private:
         string rank;
-        suitType suit;
+        Suit suit;
         int cardValue;
 
 };

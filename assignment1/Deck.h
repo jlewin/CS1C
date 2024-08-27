@@ -1,21 +1,22 @@
-#ifndef H_DeckType
-#define H_DeckType
+#ifndef Deck_H
+#define Deck_H
 
-#include "cardType.h"
+#include "Card.h"
 #include <iostream>
 
 using namespace std;
 
-class deckType
+class Deck
 {
     public:
-        deckType();
+        Deck();
         void shuffle();
         void printDeck();
         static const int TOTAL_CARDS = 52;
+        bool equals(const Deck& otherDeck);
 
     private:
-        cardType cards[TOTAL_CARDS];
+        Card cards[TOTAL_CARDS];
 
 };
 
