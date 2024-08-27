@@ -26,8 +26,8 @@ int main()
 
         bool matchesInitial = initialDeck.equals(shuffledDeck);
 
+        // Print out the first and the matching shuffled decks
         if (i == 1 || matchesInitial) {
-            // Print out the shuffled deck
             cout << "\nPerfect Shuffle #" << i << endl;
             shuffledDeck.printDeck();
         }
