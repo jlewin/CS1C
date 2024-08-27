@@ -39,6 +39,18 @@ void Deck::shuffle() {
     }
 }
 
+bool Deck::equals(const Deck& otherDeck) {
+    for (int i = 0; i < TOTAL_CARDS; i++) {
+        if (!cards[i].equals(otherDeck.cards[i])) {
+            // At least one card does not match at the current index
+            return false;
+        }
+    }
+
+    // All cards match at each index
+    return true;
+}
+
 void Deck::printDeck() {
     bool border = true;
     bool concise = true;

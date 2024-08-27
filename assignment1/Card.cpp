@@ -43,6 +43,12 @@ string Card::getRank() const {
     return rank;
 }
 
+bool Card::equals(const Card& otherCard) {
+    return rank == otherCard.rank
+        && cardValue == otherCard.cardValue;
+}
+
+
 string Card::getSuit() const {
     return suit.name;
 }   

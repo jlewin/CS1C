@@ -20,6 +20,7 @@ class Card
         string getSuit() const;
         int getValue() const;
         string toString(bool concise = false) const;
+        bool equals(const Card& otherCard);
 
         static const int RANK_COUNT = 13;
         static const int SUIT_COUNT = 4;
@@ -27,6 +28,7 @@ class Card
         static const string ranks[RANK_COUNT];
         static const Suit suits[SUIT_COUNT];
         static int instanceCount;
+
 
     private:
         string rank;

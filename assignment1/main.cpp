@@ -6,25 +6,38 @@ using namespace std;
 int main()
 {
     // Construct a deck
-    Deck deck;
+    Deck initialDeck;
+
+    const int MAX_SHUFFLES = 20;
 
     // Print out the initial deck
     cout << "\nInitial Deck" << endl;
-    deck.printDeck();
+    initialDeck.printDeck();
 
     // Shuffle the required number of time to arrive at the original deck, printing
     // out the first and last shuffles
-    for (int i = 0; i < 8; i++) {
-        deck.shuffle();
+    for (int i = 1; i <= MAX_SHUFFLES; i++) {
+        Deck shuffledDeck;
 
-        if (i == 0 || i == 7) {
+        // Perfect shuffle the deck, i number of times
+        for (int j = 0; j < i; j++) {
+            shuffledDeck.shuffle();
+        }
+
+        bool matchesInitial = initialDeck.equals(shuffledDeck);
+
+        if (i == 1 || matchesInitial) {
             // Print out the shuffled deck
-            cout << "Sort #" << i + 1 << endl;
-            deck.printDeck();
+            cout << "\nPerfect Shuffle #" << i << endl;
+            shuffledDeck.printDeck();
+        }
+
+        if (matchesInitial) {
+            cout << "\n✱ " << i << " perfect shuffles are needed to arrive back at the initial deck." << endl;
+            break;
         }
     }
-
-    cout << "\n✱ Eight perfect shuffles are needed to arrive back at the initial deck." << endl;
+    
     cout << endl;
     return 0;
 }
