@@ -7,37 +7,29 @@ int main()
 {
     // Construct a deck
     Deck initialDeck;
-
-    const int MAX_SHUFFLES = 20;
+    Deck shuffledDeck;
 
     // Print out the initial deck
     cout << "\nInitial Deck" << endl;
     initialDeck.printDeck();
 
-    // Shuffle the required number of time to arrive at the original deck, printing
-    // out the first and last shuffles
-    for (int i = 1; i <= MAX_SHUFFLES; i++) {
-        Deck shuffledDeck;
+    int shuffleCount = 0;
 
-        // Perfect shuffle the deck, i number of times
-        for (int j = 0; j < i; j++) {
-            shuffledDeck.shuffle();
-        }
+    // Shuffle until the shuffled deck is back to the original order
+    do {
 
-        bool matchesInitial = initialDeck.equals(shuffledDeck);
+        shuffledDeck.shuffle();
 
         // Print out the first and the matching shuffled decks
-        if (i == 1 || matchesInitial) {
-            cout << "\nPerfect Shuffle #" << i << endl;
+        if (shuffleCount++ == 0) {
+            cout << "\nPerfect Shuffle #" << shuffleCount << endl;
             shuffledDeck.printDeck();
         }
+    } while(!initialDeck.equals(shuffledDeck));
 
-        if (matchesInitial) {
-            cout << "\n✱ " << i << " perfect shuffles are needed to arrive back at the initial deck." << endl;
-            break;
-        }
-    }
-    
-    cout << endl;
+    cout << "\nPerfect Shuffle #" << shuffleCount << endl;
+    shuffledDeck.printDeck();
+
+    cout << "\n✱ " << shuffleCount << " perfect shuffles are needed to arrive back at the initial deck." << endl << endl;
     return 0;
 }
