@@ -22,6 +22,7 @@ class AddressEntry
 
         void print();
         friend ostream& operator<<(ostream&, const AddressEntry*);
+        int static getInstanceCount();
 
     private:
         static int instanceCount;

@@ -15,17 +15,18 @@ class AddressBook
         ~AddressBook();
 
         AddressBook* operator+(const AddressBook&) const;
+        AddressBook* operator*(const int) const;
+
         friend ostream& operator<<(ostream&, const AddressBook*);
         int getItemCount();
-        void AddEntry(string, string, string);
-        void AddEntry(const AddressEntry&);
+        void addEntry(string, string, string);
+        void addEntry(const AddressEntry&);
 
     private:
-        void EnsureSpace();
+        void ensureSpace();
         int itemCount;
         int bufferSize;
         AddressEntry** items;
-
 };
 
 #endif

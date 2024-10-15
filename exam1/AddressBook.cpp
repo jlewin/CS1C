@@ -19,47 +19,49 @@ AddressBook::AddressBook(const AddressBook& other) {
     }
 }
 
-
 AddressBook::~AddressBook() {
+    // Free entries in the array
     for (int i = 0; i < itemCount; i++) {
         delete items[i];
     }
 
+    // Free the array
     delete [] items;
 }
 
-void AddressBook::AddEntry(string name, string phone, string email) {
-    // Ensure space
-    EnsureSpace();
-
+void AddressBook::addEntry(string name, string phone, string email) {
+    ensureSpace();
     items[itemCount++] = new AddressEntry(name, phone, email);
 }
 
-void AddressBook::AddEntry(const AddressEntry& other) {
-    EnsureSpace();
+void AddressBook::addEntry(const AddressEntry& other) {
+    ensureSpace();
     items[itemCount++] = new AddressEntry(other);
 }
 
-void AddressBook::EnsureSpace() {
+// Resize the array, as needed using a doubling approach
+void AddressBook::ensureSpace() {
     if (itemCount + 1 > bufferSize) {
-        int initialSize = bufferSize;
+        #ifdef LOG_VERBOSE
+            int initialSize = bufferSize;
+        #endif
 
         bufferSize *= 2;
 
-        // Double array size and clone items
+        // Double array size and **copy** item references
         AddressEntry** temp = new AddressEntry*[bufferSize];
         for (int i = 0; i < itemCount; i++) {
             temp[i] = items[i];
         }
 
-        // Free existing
+        // Free old array
         delete [] items;
 
-        // Update reference
+        // Swap array reference
         items = temp;
 
         #ifdef LOG_VERBOSE
-            cout << "Growing array from/to (" << initialSize << "," << bufferSize << ")" << endl;
+            cout << "Array grown from " << initialSize << " to " << bufferSize << endl;
         #endif
     }
 }
@@ -69,6 +71,8 @@ int AddressBook::getItemCount() {
 }
 
 // Operator overloads
+
+// Add subscript operator, returning nullptr for non-existing items
 AddressEntry* AddressBook::operator[] (int index) const{
     // Return value of AddressEntry copy
     if (index >= itemCount) {
@@ -78,13 +82,32 @@ AddressEntry* AddressBook::operator[] (int index) const{
     return items[index];
  }
 
+// Add two address books
 AddressBook* AddressBook::operator+(const AddressBook& other ) const {
+    // Clone this address book
     AddressBook* temp = new AddressBook(*this);
 
+    // Copy/clone in new items
     for (int i = 0; i < other.itemCount; i++) {
-        temp->AddEntry(*(other.items[i]));
+        temp->addEntry(*(other.items[i]));
     }
 
+    // Return the generated address book
+    return temp;
+}
+
+// Duplicate the current address book, n times, into a new array
+AddressBook* AddressBook::operator*(const int  count ) const {
+    AddressBook* temp = new AddressBook(*this);
+
+    // Loop n times over this array, creating n cloned copies
+    for (int j = 0; j < count -1; j++) {
+        for (int i = 0; i < this->itemCount; i++) {
+            temp->addEntry(*(this->items[i]));
+        }
+    }
+
+    // Return the generated address book
     return temp;
 }
 

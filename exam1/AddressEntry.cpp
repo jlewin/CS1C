@@ -26,7 +26,6 @@ AddressEntry::AddressEntry(const AddressEntry& other) {
     instanceId = instanceCount++;
 }
 
-
 AddressEntry::AddressEntry(string fullName, string phoneNumber, string email) {
     // dbg instances
     #ifdef LOG_VERBOSE
@@ -43,6 +42,12 @@ AddressEntry::~AddressEntry() {
     #ifdef LOG_VERBOSE
         cout << "~AddressEntry(" << instanceId << ")" << endl;
     #endif
+
+    instanceCount--;
+}
+
+int AddressEntry::getInstanceCount() {
+    return instanceCount;
 }
 
 string AddressEntry::getFullName() const {
