@@ -1,0 +1,191 @@
+
+/*
+
+enum replacementMode {
+    vowels, 
+    numbers, 
+    etothree, 
+    insertMidLf
+};
+
+void mangleString2(string text) {
+    bool replaceVowels = false;
+    replacementMode mode;
+    cout << '[' << text << ']'  << endl;
+
+    if (text[0] == '#') {
+        mode = etothree;
+        for (char c : text) {
+            if (c >= '0' && c <= '9') {
+                mode = numbers;
+                break;
+            }
+        }
+        // Drop leading #
+        text = text.substr(1);
+
+    } else if (text.find("*") != string::npos) {
+        mode = vowels;
+    } else {
+        mode = insertMidLf;
+
+        // finally, if neither of the previous applies, add a 
+        //newline character \n in the middle of the string (use length() / 2).
+        text.insert(text.length() / 2, 1, '\n');
+        cout << text << endl;
+        return;
+    }
+
+
+    for (char c : text) {
+        if (mode == vowels && c == '*') {
+            replaceVowels = true;
+           continue;
+        } else if (mode == numbers && c >= '0' && c <= '9') {
+            int num = c - '0';
+            string s = "";
+            cout << s.insert(0, num, '-');
+            continue;
+        } else if (mode == replaceVowels) {
+            switch (tolower(c)) {
+                case 'a':
+                case 'e':
+                case 'i':
+                case 'o':
+                case 'u':
+                    c = 'i';
+                    break;
+            }
+        } else if (mode == etothree) {
+            switch (tolower(c)) {
+                case 'e':
+                    c = '3';
+                    break;
+            }
+        }
+        //if (c == '#') continue;
+
+        cout << c;
+    }
+
+    cout << endl;
+}
+
+void mangleString4(string text) {
+    bool replaceVowels = false;
+    replacementMode mode;
+
+    if (text.find("*") != string::npos) {
+        mode = vowels;
+    } else if (text.find("#") != string::npos) {
+        mode = etothree;
+        for (char c : text) {
+            if (c == '#') continue;
+
+            if (c >= '0' && c <= '9') {
+                mode = numbers;
+                break;
+            }
+        }
+        // Drop leading #
+        text = text.substr(1);
+    } else {
+        mode = insertMidLf;
+
+        // finally, if neither of the previous applies, add a 
+        //newline character \n in the middle of the string (use length() / 2).
+        text.insert(text.length() / 2 + 1, 1, '\n');
+        cout << text << endl;
+        return;
+    }
+
+    for (char c : text) {
+        if (mode == numbers) {
+            if (c >= '0' && c <= '9') {
+                int num = c - '0';
+                string s = "";
+                cout << s.insert(0, num, '-');
+                continue;
+            }
+        } else if (c == '*') {
+            replaceVowels = true;
+            continue;
+        }
+
+        if ((mode == vowels && replaceVowels) || mode == etothree) {
+            switch (tolower(c)) {
+                case 'a':
+                case 'e':
+                case 'i':
+                case 'o':
+                case 'u':
+                    c = (mode == vowels) ? 'i' : 'e';
+                    break;
+            }
+        }
+
+        cout << c;
+    }
+
+    cout << endl;
+}
+
+void mangleString6(string text) {
+    bool replaceVowels = false;
+    replacementMode mode;
+
+    if (text.find("*") != string::npos) {
+        mode = vowels;
+    } else if (text.find("#") != string::npos) {
+        mode = etothree;
+        for (char c : text) {
+            if (c == '#') continue;
+
+            if (c >= '0' && c <= '9') {
+                mode = numbers;
+                break;
+            }
+        }
+        // Drop leading #
+        text = text.substr(1);
+    } else {
+        mode = insertMidLf;
+
+        // finally, if neither of the previous applies, add a 
+        //newline character \n in the middle of the string (use length() / 2).
+        text.insert(text.length() / 2 + 1, 1, '\n');
+        cout << text << endl;
+        return;
+    }
+
+    for (char c : text) {
+        if (mode == numbers) {
+            if (c >= '0' && c <= '9') {
+                int num = c - '0';
+                string s = "";
+                cout << s.insert(0, num, '-');
+                continue;
+            }
+        } else if (c == '*') {
+            replaceVowels = true;
+            continue;
+        }
+
+        if ((mode == vowels && replaceVowels) || mode == etothree) {
+            switch (tolower(c)) {
+                case 'a':
+                case 'e':
+                case 'i':
+                case 'o':
+                case 'u':
+                    c = (mode == vowels) ? 'i' : 'e';
+                    break;
+            }
+        }
+
+        cout << c;
+    }
+
+    cout << endl;
+}
+*/
