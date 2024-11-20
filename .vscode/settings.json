@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.linq": "csharp",
         "*.rasi": "css",
         "*.bbmodel": "json",
         "*.sublime-snippet": "xml",
@@ -15,6 +16,8 @@
         "*.printer": "json",
         "*.mcx": "json",
         "*.h": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     }
 }
