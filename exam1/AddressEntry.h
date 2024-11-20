@@ -9,18 +9,17 @@ class AddressEntry
     public:
         AddressEntry();
         AddressEntry(const AddressEntry&);
-        AddressEntry(string, string, string);
+        AddressEntry(const string&, const string&, const string&);
         ~AddressEntry();
 
         // Accessors and mutators
         string getFullName() const; 
         string getPhoneNumber() const;
         string getEmail() const;
-        void setFullName(string);
-        void setPhoneNumber(string);
-        void setEmail(string);
+        void setFullName(const string&);
+        void setPhoneNumber(const string&);
+        void setEmail(const string&);
 
-        void print();
         friend ostream& operator<<(ostream&, const AddressEntry*);
         int static getInstanceCount();
 

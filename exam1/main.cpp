@@ -8,6 +8,9 @@ using namespace std;
 AddressBook* loadSimpleList();
 AddressBook* loadFromDisk();
 
+// Define LOG_VERBOSE or set -DLOG_VERBOSE compile time flag to enable verbose logging
+// of constructor and destructor calls
+
 int main() {
     // Load and print an address book from disk (5 users)
     AddressBook* book1 = loadFromDisk();
@@ -25,15 +28,17 @@ int main() {
     AddressBook* book4 = *book2 * 2;
     cout << book4 << endl;
 
-    // Confirm requirements with simple runtime checks
-    AddressEntry* dne = (*book2)[1001];
-    bool isNull = (dne == nullptr);
-    cout << boolalpha << "DNE subscript returns nullptr: " << isNull << endl;
+    cout << "--------Validations--------" << endl;
 
-    
+    // Confirm requirements with simple runtime checks
+    AddressEntry* dne1 = (*book2)[1001];
+    AddressEntry* dne2 = (*book2)[-3];
+    bool isNull = dne1 == nullptr && dne2 == nullptr;
+    cout << boolalpha << "Does not exist subscript returns nullptr: " << isNull << endl;
+
+    // Compare two entries from different address books
     AddressEntry* entry1 = (*book2)[0];
     AddressEntry* entry2 = (*book3)[0];
-    
     bool entriesHaveSameUser = entry1->getFullName() == entry2->getFullName();
     bool entriesAreNotReferences = &entry1 != &entry2;
 
@@ -49,8 +54,10 @@ int main() {
     delete book4;
 
     // Confirm free
-    cout << "Cleans up env - remaining AddressEntry count: " << AddressEntry::getInstanceCount() << endl << endl;
-
+    cout << "Cleans up env" << endl
+         << "  AddressBook count: " << AddressBook::getInstanceCount() << endl
+         << "  AddressEntry count: " << AddressEntry::getInstanceCount() << endl
+         << "---------------------------" << endl << endl;
     return 0;
 }
 
@@ -71,7 +78,7 @@ AddressBook* loadFromDisk() {
         getline(file, line);
 
         // Add entry for user
-        addressBook->addEntry(name, phone, email);
+        addressBook->add(name, phone, email);
     }
 
     // Close the file
@@ -82,9 +89,9 @@ AddressBook* loadFromDisk() {
 
 AddressBook* loadSimpleList() {
     AddressBook* addressBook = new AddressBook();
-    addressBook->addEntry("joe bob", "333-1234", "joebob@example.com");
-    addressBook->addEntry("jim smith", "222-1234", "jim@example.com");
-    addressBook->addEntry("bob talck", "111-1234", "bob@example.com");
+    addressBook->add("joe bob", "333-1234", "joebob@example.com");
+    addressBook->add("jim smith", "222-1234", "jim@example.com");
+    addressBook->add("bob talck", "111-1234", "bob@example.com");
 
     return addressBook;
 }

@@ -10,7 +10,7 @@ AddressEntry::AddressEntry() {
     #ifdef LOG_VERBOSE
         cout << "AddressEntry(" << instanceCount << ")" << endl;
     #endif
-    instanceId = instanceCount++;
+    this->instanceId = instanceCount++;
 }
 
 AddressEntry::AddressEntry(const AddressEntry& other) {
@@ -22,11 +22,10 @@ AddressEntry::AddressEntry(const AddressEntry& other) {
     this->fullName = other.fullName;
     this->phoneNumber = other.phoneNumber;
     this->email = other.email;
-
-    instanceId = instanceCount++;
+    this->instanceId = instanceCount++;
 }
 
-AddressEntry::AddressEntry(string fullName, string phoneNumber, string email) {
+AddressEntry::AddressEntry(const string& fullName, const string&  phoneNumber, const string& email) {
     // dbg instances
     #ifdef LOG_VERBOSE
         cout << "AddressEntry(" << fullName << ", num, email): " << instanceCount << endl;
@@ -60,25 +59,17 @@ string AddressEntry::getEmail() const {
     return email;
 }
 
-void AddressEntry::setFullName(string newName) {
+void AddressEntry::setFullName(const string& newName) {
     fullName = newName;
 }
 
-void AddressEntry::setPhoneNumber(string newPhone) {
+void AddressEntry::setPhoneNumber(const string& newPhone) {
     phoneNumber = newPhone;
 }
 
-void AddressEntry::setEmail(string newEmail) {
+void AddressEntry::setEmail(const string& newEmail) {
     email = newEmail;
 }
-
-
-void AddressEntry::print() {
-    cout << "Name: " << fullName << endl;
-    cout << phoneNumber << endl;
-    cout << email << endl << endl;
-}
-
 
 ostream& operator<<(ostream& outstream, const AddressEntry* entry) {
     outstream << endl
@@ -88,4 +79,3 @@ ostream& operator<<(ostream& outstream, const AddressEntry* entry) {
 
     return outstream;
 }
-
