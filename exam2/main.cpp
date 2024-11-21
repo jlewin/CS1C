@@ -12,14 +12,12 @@ using namespace std;
 // of constructor and destructor calls
 
 int main() {
-
-    LibraryInventory* inventory = new LibraryInventory();
-
-    auto shelf = (*inventory)[0];
+    LibraryInventory libraryInventory;
+    auto shelf = libraryInventory[0];
     shelf->addItem(new InventoryItem("The Great Gatsby", "F. Scott Fitzgerald", "1925"), 2); 
 
     cout << "Library Inventory instance count: " << LibraryInventory::getInstanceCount() << endl;
-    cout << inventory << endl;
+    cout << libraryInventory << endl;
 
     return 0;
 }

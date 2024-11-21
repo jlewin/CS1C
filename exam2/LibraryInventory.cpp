@@ -24,10 +24,10 @@ int LibraryInventory::getShelfCount() const {
     return libraryShelves.size();
 }
 
-ostream& operator<<(ostream& outstream, const LibraryInventory *libraryInventory) {
-    outstream << "-- Library Inventory -- << endl;
-    for (int i = 0; i < libraryInventory->getShelfCount(); i++) {
-        outstream << (*libraryInventory)[i];
+ostream& operator<<(ostream& outstream, const LibraryInventory& libraryInventory) {
+    outstream << "-- Library Inventory --" << endl;
+    for (int i = 0; i < libraryInventory.getShelfCount(); i++) {
+        outstream << libraryInventory[i];
     }
 
     return outstream;

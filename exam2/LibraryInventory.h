@@ -17,12 +17,11 @@ class LibraryInventory
         void printInventory() const;
         void printCheckedOutItems() const;
         void swapItems(InventoryItem*, InventoryItem*);
-
         int getShelfCount() const;
 
         LibraryShelf* operator[](int index) const;
 
-        friend ostream& operator<<(ostream&, const LibraryInventory*);
+        friend ostream& operator<<(ostream&, const LibraryInventory&);
 
         int static getInstanceCount();
 
