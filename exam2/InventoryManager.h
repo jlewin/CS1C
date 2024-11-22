@@ -1,5 +1,5 @@
-#ifndef LibraryInventory_H
-#define LibraryInventory_H
+#ifndef InventoryManager_H
+#define InventoryManager_H
 
 #include <iostream>
 #include "InventoryItem.h"
@@ -7,10 +7,10 @@
 
 using namespace std;
 
-class LibraryInventory
+class InventoryManager
 {
     public:
-        LibraryInventory();
+        InventoryManager();
         void addItem(InventoryItem*);
         void checkoutItem(InventoryItem*);
         void checkinItem(InventoryItem*);
@@ -19,9 +19,9 @@ class LibraryInventory
         void swapItems(InventoryItem*, InventoryItem*);
         int getShelfCount() const;
 
-        LibraryShelf* operator[](int index) const;
+        LibraryShelf& operator[](int index) const;
 
-        friend ostream& operator<<(ostream&, const LibraryInventory&);
+        friend ostream& operator<<(ostream&, const InventoryManager&);
 
         int static getInstanceCount();
 
@@ -32,5 +32,4 @@ class LibraryInventory
         string author;
         string copyrightDate;
 };
-
 #endif
