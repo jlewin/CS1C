@@ -11,13 +11,14 @@ class MovieItem : public InventoryItem
 {
     public:
         MovieItem();
-        friend ostream& operator<<(ostream&, const MovieItem*);
+        MovieItem(const string& id, const string& desc, const string& title, const string& director, const vector<string> mainActors);
+        void print(std::ostream& os) const override;
         int static getInstanceCount();
 
     private:
         static int instanceCount;
         string title;
-        string directory;
+        string director;
         vector<string> mainActors;
 };
 

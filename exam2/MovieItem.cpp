@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "MovieItem.h"
 
 using namespace std;
@@ -9,11 +10,32 @@ MovieItem::MovieItem() {
     instanceCount++;
 }
 
-ostream& operator<<(ostream& outstream, const MovieItem *MovieItem) {
-    outstream << "Name: " << MovieItem->name << endl;
+MovieItem::MovieItem(const string& id, const string& desc, const string& title, const string& director, const vector<string> mainActors) {
+    // Base members
+    setNormailzedName(title);
+    this->id = id;
+    this->description = desc;
 
-    return outstream;
+    this->title = title;
+    this->director  = director;
+    this->mainActors = mainActors;
+
+    instanceCount++;
 }
+
+void MovieItem::print(ostream& os) const {
+    InventoryItem::print(os);
+    
+    os << indent() << Screen::heading("Movie Details ------------------------------") << endl;
+    os << indent() << setw(titleWidth) << "Title" << title << endl;
+    os << indent() << setw(titleWidth) << "Director" << director << endl;
+    os << indent() << setw(titleWidth) << "Main Actors";
+    for (int i = 0; i < mainActors.size(); i++) {
+        os << mainActors[i] << (i < mainActors.size() - 1 ? ", " : "");
+    }
+    os << endl;
+}
+
 
 int MovieItem::getInstanceCount() {
     return instanceCount;

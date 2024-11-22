@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <iomanip>
 #include "BookItem.h"
 
 using namespace std;
@@ -9,13 +11,24 @@ BookItem::BookItem() {
     instanceCount++;
 }
 
-// BookItem::~BookItem() {
-// }
+BookItem::BookItem(const string& id, const string& desc, const string& title, const string& author, const string& copyrightDate) {
+    setNormailzedName(title);
 
-ostream& operator<<(ostream& outstream, const BookItem *BookItem) {
-    outstream << "Name: " << BookItem->title << endl;
+    this->id = id;
+    this->title = title;
+    this->description = desc;
+    this->author = author;
+    this->copyrightDate = copyrightDate;
+    instanceCount++;
+}
 
-    return outstream;
+void BookItem::print(ostream& os) const {
+    InventoryItem::print(os);
+    
+    os << indent() << Screen::heading("Book Details ------------------------------") << endl;
+    os << indent() << setw(titleWidth) << "Title" << title << endl;
+    os << indent() << setw(titleWidth) << "Author" << author << endl;
+    os << indent() << setw(titleWidth) << "Copyright Date" << copyrightDate << endl;
 }
 
 int BookItem::getInstanceCount() {
