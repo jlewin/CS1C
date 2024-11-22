@@ -26,11 +26,11 @@ MovieItem::MovieItem(const string& id, const string& desc, const string& title, 
 void MovieItem::print(ostream& os) const {
     InventoryItem::print(os);
     
-    os << indent() << Screen::heading("Movie Details ------------------------------") << endl;
+    os << indent() << headingText("Movie Details ------------------------------") << endl;
     os << indent() << setw(titleWidth) << "Title" << title << endl;
     os << indent() << setw(titleWidth) << "Director" << director << endl;
     os << indent() << setw(titleWidth) << "Main Actors";
-    for (int i = 0; i < mainActors.size(); i++) {
+    for (size_t i = 0; i < mainActors.size(); i++) {
         os << mainActors[i] << (i < mainActors.size() - 1 ? ", " : "");
     }
     os << endl;

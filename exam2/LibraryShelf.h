@@ -5,27 +5,30 @@
 #include <vector>
 #include "InventoryItem.h"
 #include "Screen.h"
+#include "constants.h"
 
 using namespace std;
 
 class LibraryShelf
 {
     public:
-        LibraryShelf();
+        LibraryShelf(const string&);
         ~LibraryShelf();
 
         InventoryItem* operator[](int index) const;
         friend ostream& operator<<(ostream&, const LibraryShelf&);
 
-        int getItemCount() const;
-        string name;
+        int getCompartmentCount() const;
 
         void addItem(InventoryItem*, int);
 
-    private:
-        // Intiialized to nullptr until assigned
-        vector<InventoryItem*> compartments = vector<InventoryItem*>(15);
+        static int getInstanceCount();
 
-};;
+    private:
+        static int instanceCount;
+        string name;
+        // Intiialized to nullptr until assigned
+        vector<InventoryItem*> compartments = vector<InventoryItem*>(MAX_COMPARTMENTS);
+};
 
 #endif

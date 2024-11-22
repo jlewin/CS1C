@@ -3,13 +3,20 @@
 
 using namespace std;
 
-LibraryShelf::LibraryShelf() {
+int LibraryShelf::instanceCount = 0;
+
+LibraryShelf::LibraryShelf(const string& name) {
+    instanceCount++;
+    compartments = vector<InventoryItem*>(MAX_COMPARTMENTS);
+    this->name = name;
 }
 
 LibraryShelf::~LibraryShelf() {
     for (auto item : compartments) {
         delete item;
     }
+
+    instanceCount--;
 
     cout << "LibraryShelf destructor called: " << endl;
     cout << InventoryItem::getInstanceCount() << " InventoryItem instances remaining" << endl;
@@ -24,28 +31,34 @@ void LibraryShelf::addItem(InventoryItem* item, int index) {
 // Add subscript operator, returning nullptr for non-existing items
 InventoryItem* LibraryShelf::operator[] (int index) const{
     return compartments[index];
- }
+}
 
-int LibraryShelf::getItemCount() const {
+int LibraryShelf::getCompartmentCount() const {
     return (int) compartments.size();
 }
 
 ostream& operator<<(ostream& outstream, const LibraryShelf& shelf) {
-    outstream << Screen::heading("Shelf ------------------------------") << endl;
+    outstream << headingText(shelf.name) << endl;
+    outstream << separator() << endl;
 
-    //InventoryItem::setIndentText("    │ ");
+    auto& options = FormattingOptions::getInstance();
 
     // Loop over entries
-    for (int i = 0; i <  shelf.getItemCount(); i++) {
+    for (int i = 0; i <  shelf.getCompartmentCount(); i++) {
         // Reference the item on the given shelf, at the given compartment
         InventoryItem* item = shelf[i];
 
         if (item == nullptr) {
-            outstream << " " << (i + 1) << ". " << "Empty Container" << endl;
+            if (options.showEmptyCompartments) {
+                outstream << " C" << (i + 1) << ". " << "Empty Compartment" << endl;
+            }
         } else {
-            outstream << " " << (i + 1) << ". " << "Occupied with (#" << item->getID() << ")" << endl;
-            // Call the LibraryItem operator<< overload
-            outstream << *item;
+            if ((options.showCheckedOutOnly && item->getCheckedOut()) ||
+                (options.showCheckedInOnly && !item->getCheckedOut())){
+                outstream << " C" << (i + 1) << ". " << "Occupied with #" << item->getID() << endl;
+                outstream << *item; // Call the LibraryItem operator<< overload
+            }
+
         }
     }
 
@@ -54,3 +67,6 @@ ostream& operator<<(ostream& outstream, const LibraryShelf& shelf) {
     return outstream;
 }
 
+int LibraryShelf::getInstanceCount() {
+    return instanceCount;
+}

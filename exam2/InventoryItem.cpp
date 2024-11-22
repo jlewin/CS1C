@@ -29,6 +29,14 @@ string limitWidth(string text, size_t width) {
     return text;
 }
 
+bool InventoryItem::getCheckedOut() const {
+    return checkedOut;
+}
+
+void InventoryItem::setCheckedOut(bool isCheckedOut) {
+    checkedOut = isCheckedOut;
+}
+
 void InventoryItem::print(std::ostream& os) const {
     os << left
        << indent() << setw(titleWidth) << "Status" << (checkedOut ? "Checked Out" : "Avaiable") << endl

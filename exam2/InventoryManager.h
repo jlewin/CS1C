@@ -11,7 +11,6 @@ class InventoryManager
 {
     public:
         InventoryManager();
-        void addItem(InventoryItem*);
         void checkoutItem(InventoryItem*);
         void checkinItem(InventoryItem*);
         void printInventory() const;
@@ -24,6 +23,7 @@ class InventoryManager
         friend ostream& operator<<(ostream&, const InventoryManager&);
 
         int static getInstanceCount();
+        void addItem(const int shelf, const int compartment, InventoryItem* item);
 
     private:
         vector<LibraryShelf*> libraryShelves;

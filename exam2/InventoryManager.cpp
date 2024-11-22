@@ -9,9 +9,8 @@ InventoryManager::InventoryManager() {
     instanceCount++;
 
     for (int i = 0; i < 3; i++) {
-        auto shelf = new LibraryShelf();
-        shelf->name = "Shelf " + to_string(i + 1);
-        libraryShelves.push_back(shelf);
+        char id = 'A' + i;
+        libraryShelves.push_back(new LibraryShelf("Shelf " + string(1, id)));
     }
 }
 
@@ -23,12 +22,15 @@ LibraryShelf& InventoryManager::operator[](int index) const {
     return *libraryShelves[index];
 }
 
+void InventoryManager::addItem(int shelf, int compartment, InventoryItem* item) {
+    libraryShelves[shelf]->addItem(item, compartment);
+}
+
 int InventoryManager::getShelfCount() const {
     return (int) libraryShelves.size();
 }
 
 ostream& operator<<(ostream& outstream, const InventoryManager& libraryInventory) {
-    outstream << "-- Library Inventory --" << endl;
     for (int i = 0; i < libraryInventory.getShelfCount(); i++) {
         // Added for clarity on what's passed to cout below
         LibraryShelf& shelf = libraryInventory[i];

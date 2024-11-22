@@ -25,7 +25,7 @@ BookItem::BookItem(const string& id, const string& desc, const string& title, co
 void BookItem::print(ostream& os) const {
     InventoryItem::print(os);
     
-    os << indent() << Screen::heading("Book Details ------------------------------") << endl;
+    os << indent() << headingText("Book Details ------------------------------") << endl;
     os << indent() << setw(titleWidth) << "Title" << title << endl;
     os << indent() << setw(titleWidth) << "Author" << author << endl;
     os << indent() << setw(titleWidth) << "Copyright Date" << copyrightDate << endl;

@@ -24,7 +24,7 @@ MagazineItem::MagazineItem(const string& id, const string& desc, const string& t
 void MagazineItem::print(ostream& os) const {
     InventoryItem::print(os);
     
-    os << indent() << Screen::heading("Magazine Details ------------------------------") << endl;
+    os << indent() << headingText("Magazine Details ------------------------------") << endl;
     os << indent() << setw(titleWidth) << "Title" << title << endl;
     os << indent() << setw(titleWidth) << "Edition" << edition << endl;
 }
