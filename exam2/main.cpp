@@ -1,22 +1,66 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include "LibraryInventory.h"
+#include "InventoryManager.h"
+#include "BookItem.h" 
+#include "MagazineItem.h" 
+#include "MovieItem.h" 
 
+#include "json.hpp"
+
+using json = nlohmann::json;
 using namespace std;
 
-// AddressBook* loadSimpleList();
-// AddressBook* loadFromDisk();
+void loadInventory(InventoryManager& libraryInventory) {
+    std::ifstream f("data.json");
+    json data = json::parse(f);
 
-// Define LOG_VERBOSE or set -DLOG_VERBOSE compile time flag to enable verbose logging
-// of constructor and destructor calls
+    int i = 0;
+    for (auto& book : data["books"]) {
+        libraryInventory[0].addItem(
+            new BookItem(
+                book["isbn"],        // The isbn is a decent item identifier
+                book["description"], 
+                book["title"],
+                book["author"],
+                book["published"]),  // Imagine the published date is the copyright date
+            i++);
+    }
+
+    i = 0;
+    for (auto& magazine : data["magazines"]) {
+        libraryInventory[1].addItem(
+            new MagazineItem(
+                magazine["issn"],        // The issn is a decent item identifier
+                magazine["description"], 
+                magazine["title"],
+                magazine["issue"]),
+            i++);
+    }
+
+    i = 0;
+    for (auto& movie : data["movies"]) {
+
+        auto actors = movie["main_actors"];
+        auto gah = actors.get<vector<string>>();
+
+        libraryInventory[2].addItem(
+            new MovieItem(
+                movie["id"],
+                movie["description"], 
+                movie["title"],
+                movie["director"],
+                gah),
+            i++);
+    }
+}
+
 
 int main() {
-    LibraryInventory libraryInventory;
-    auto shelf = libraryInventory[0];
-    shelf->addItem(new InventoryItem("The Great Gatsby", "F. Scott Fitzgerald", "1925"), 2); 
+    InventoryManager libraryInventory;
+    loadInventory(libraryInventory);
 
-    cout << "Library Inventory instance count: " << LibraryInventory::getInstanceCount() << endl;
+    cout << "Library Inventory instance count: " << InventoryManager::getInstanceCount() << endl;
     cout << libraryInventory << endl;
 
     return 0;
