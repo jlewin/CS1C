@@ -16,14 +16,21 @@ using namespace std;
 
 bool getCompartment(const string&, InventoryManager&, int&, int&);
 void loadInventory(InventoryManager&);
+string getDueDate(int days);
 
 int main()
 {
+    // TODO: Implement the authentication system
+    string activeUser = "jlewin";
+
     auto& options = FormattingOptions::getInstance();
 
     bool choiceValid = true;
     char choice = ' ';
     string notifyMessage = "";
+
+    // Increment var
+    int inc = 1;
 
     InventoryManager libraryInventory;
     loadInventory(libraryInventory);
@@ -37,7 +44,7 @@ int main()
         cout << " 4. Print checked-in items (items in storage)" << endl;
         cout << " 5. Print checked-out items" << endl;
         cout << " 6. Swap items" << endl;
-        cout << " 7. Print all items" << endl;
+        cout << " 7. Print all storage" << endl;
         cout << " 8. Exit\n" << endl;
 
         // Report on invalid choice
@@ -62,9 +69,12 @@ int main()
         {
         case '1':
             if (getCompartment("Add an item", libraryInventory, shelf, compartment)) {
+                // Increment the item id
+                string n = to_string(inc++);
+
                 // Use the required indexing syntax
                 if (libraryInventory[shelf][compartment] == nullptr) {
-                    libraryInventory[shelf].addItem(new BookItem("Hello", "hello2", "hello3", "hellow4", "hello5"), compartment);
+                    libraryInventory[shelf].addItem(new BookItem( "id-" + n, "description-" + n, "title-" + n, "author-" + n, "na"), compartment);
                 } else {
                     notifyMessage = "\033[1;94mCompartment is already occupied. Please try again.\033[0m";
                 }
@@ -82,7 +92,12 @@ int main()
                 } else {
                     // Use the api/interface to change the checked out status
                     InventoryItem* item = libraryInventory[shelf][compartment];
-                    item->setCheckedOut(setCheckedOut);
+                    if (setCheckedOut) {
+                        string dueDate = getDueDate(21);
+                        item->checkoutItem(dueDate, activeUser);
+                    } else {
+                        item->checkinItem();
+                    }
                 }
             }
         }
@@ -91,9 +106,12 @@ int main()
         case '4':
         case '5':
         {
+            // Too much visibility state, loop back and clean up...
+            options.showAllItems = false;
+            options.showEmptyCompartments = false;
+            
             options.showCheckedInOnly = choice == '4';
             options.showCheckedOutOnly = choice == '5';
-            options.showEmptyCompartments = false;
 
             initMenu(options.showCheckedInOnly ? "Checked In Items" : "Checked Out Items");
             cout << libraryInventory << endl;
@@ -102,7 +120,6 @@ int main()
             break;
         case '6':
         {
-            bool setCheckedOut = choice == '2';
             int shelfIndex2 = -1;
             int compartmentIndex2 = -1;
 
@@ -115,9 +132,10 @@ int main()
                 if (c1 == nullptr || c2 == nullptr) {
                     notifyMessage = "\033[1;94mOne or more compartments are empty. Please try again.\033[0m";
                 } else {
+                    // Copy to new variable
                     InventoryItem temp = *c1;
 
-                    // Swap, wouldn't it be nice...
+                    // Brute force swap, seems like I'm missing the right approach. Will continue to investigate.
                     *c1 = *c2;
                     *c2 = temp;
                 }
@@ -143,6 +161,18 @@ int main()
     } while (true);
 
     return 0;
+}
+
+string getDueDate(int days) {
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    tm.tm_mday += days;
+    std::mktime(&tm); // Normalize the time structure
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%Y-%m-%d");
+
+    string dueDate = oss.str();
+    return dueDate;
 }
 
 void loadInventory(InventoryManager& libraryInventory) {

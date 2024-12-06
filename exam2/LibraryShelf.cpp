@@ -54,7 +54,8 @@ ostream& operator<<(ostream& outstream, const LibraryShelf& shelf) {
             }
         } else {
             if ((options.showCheckedOutOnly && item->getCheckedOut()) ||
-                (options.showCheckedInOnly && !item->getCheckedOut())){
+                (options.showCheckedInOnly && !item->getCheckedOut()) ||
+                options.showAllItems){
                 outstream << " C" << (i + 1) << ". " << "Occupied with #" << item->getID() << endl;
                 outstream << *item; // Call the LibraryItem operator<< overload
             }

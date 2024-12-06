@@ -15,8 +15,9 @@ class InventoryItem
         virtual ~InventoryItem();
         virtual void print(ostream& os) const;
 
+        void checkoutItem(string dueDate, string checkedOutBy);
+        void checkinItem();
         bool getCheckedOut() const;
-        void setCheckedOut(bool);
 
         string getID() const;
 
@@ -35,6 +36,8 @@ class InventoryItem
         static int titleWidth;
         
     private:
+        string dueDate;
+        string checkedOutBy;
         bool checkedOut;
         static string indentText;
         static int instanceCount;

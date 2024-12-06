@@ -53,7 +53,7 @@ void pauseForEnter()
     // Referenced implementation from https://stackoverflow.com/a/17665821/84369
     do
     {
-        cout << "\nPress <\033[1;33mEnter\033[0m> to continue... ";
+        cout << "Press <\033[1;33mEnter\033[0m> to continue... ";
         nextChar = cin.get();
     } while (nextChar != '\n');
     cin.putback('\n');

@@ -10,7 +10,7 @@ int InventoryItem::titleWidth = 16;
 
 InventoryItem::InventoryItem() {
     instanceCount++;
-
+    checkedOut = false;
 }
 
 InventoryItem::~InventoryItem() {
@@ -33,13 +33,28 @@ bool InventoryItem::getCheckedOut() const {
     return checkedOut;
 }
 
-void InventoryItem::setCheckedOut(bool isCheckedOut) {
-    checkedOut = isCheckedOut;
+void InventoryItem::checkoutItem(string dueDate, string checkedOutBy) {
+    this->checkedOut = true;
+    this->dueDate = dueDate;
+    this->checkedOutBy = checkedOutBy;
+}
+
+void InventoryItem::checkinItem() {
+    this->checkedOut = false;
+    this->dueDate = "";
+    this->checkedOutBy = "";
 }
 
 void InventoryItem::print(std::ostream& os) const {
+
+    string status = checkedOut ? "Checked out" : "Avaiable";
+
+    if (checkedOut) {
+        status += " by " + checkedOutBy + ", due back by " + dueDate;
+    }
+
     os << left
-       << indent() << setw(titleWidth) << "Status" << (checkedOut ? "Checked Out" : "Avaiable") << endl
+       << indent() << setw(titleWidth) << "Status" << status << endl
        << indent() << setw(titleWidth) << "ID" << id << endl
        << indent() << setw(titleWidth) << "Name" << name << endl
        << indent() << setw(titleWidth) << "Description" << limitWidth(description, 85) << endl;

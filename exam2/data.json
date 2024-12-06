@@ -34,17 +34,6 @@
             "website": "http://speakingjs.com/"
         },
         {
-            "isbn": "9781491950296",
-            "title": "Programming JavaScript Applications",
-            "subtitle": "Robust Web Architecture with Node, HTML5, and Modern JS Libraries",
-            "author": "Eric Elliott",
-            "published": "2014-07-01T00:00:00.000Z",
-            "publisher": "O'Reilly Media",
-            "pages": 254,
-            "description": "Take advantage of JavaScript's power to build robust web-scale or enterprise applications that are easy to extend and maintain. By applying the design patterns outlined in this practical book, experienced JavaScript developers will learn how to write flexible and resilient code that's easier-yes, easier-to work with as your code base grows.",
-            "website": "http://chimera.labs.oreilly.com/books/1234000000262/index.html"
-        },
-        {
             "isbn": "9781593277574",
             "title": "Understanding ECMAScript 6",
             "subtitle": "The Definitive Guide for JavaScript Developers",
@@ -54,28 +43,6 @@
             "pages": 352,
             "description": "ECMAScript 6 represents the biggest update to the core of JavaScript in the history of the language. In Understanding ECMAScript 6, expert developer Nicholas C. Zakas provides a complete guide to the object types, syntax, and other exciting changes that ECMAScript 6 brings to JavaScript.",
             "website": "https://leanpub.com/understandinges6/read"
-        },
-        {
-            "isbn": "9781491904244",
-            "title": "You Don't Know JS",
-            "subtitle": "ES6 & Beyond",
-            "author": "Kyle Simpson",
-            "published": "2015-12-27T00:00:00.000Z",
-            "publisher": "O'Reilly Media",
-            "pages": 278,
-            "description": "No matter how much experience you have with JavaScript, odds are you don’t fully understand the language. As part of the \"You Don’t Know JS\" series, this compact guide focuses on new features available in ECMAScript 6 (ES6), the latest version of the standard upon which JavaScript is built.",
-            "website": "https://github.com/getify/You-Dont-Know-JS/tree/master/es6%20&%20beyond"
-        },
-        {
-            "isbn": "9781449325862",
-            "title": "Git Pocket Guide",
-            "subtitle": "A Working Introduction",
-            "author": "Richard E. Silverman",
-            "published": "2013-08-02T00:00:00.000Z",
-            "publisher": "O'Reilly Media",
-            "pages": 234,
-            "description": "This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git experience.",
-            "website": "http://chimera.labs.oreilly.com/books/1230000000561/index.html"
         },
         {
             "isbn": "9781449337711",
@@ -135,39 +102,6 @@
             "website": "https://www.pcmag.com/"
         },
         {
-            "issn": "0362-4331",
-            "title": "The New York Times Magazine",
-            "issue": "March 2024",
-            "editor": "Jake Silverstein",
-            "published": "2024-03-01T00:00:00.000Z",
-            "publisher": "The New York Times Company",
-            "pages": 78,
-            "description": "In-depth journalism on culture, politics, and the arts.",
-            "website": "https://www.nytimes.com/section/magazine"
-        },
-        {
-            "issn": "0261-3077",
-            "title": "The Guardian Weekly",
-            "issue": "April 2024",
-            "editor": "Katharine Viner",
-            "published": "2024-04-01T00:00:00.000Z",
-            "publisher": "Guardian News & Media",
-            "pages": 64,
-            "description": "A curated selection of stories from The Guardian, covering world news and features.",
-            "website": "https://www.theguardian.com/weekly"
-        },
-        {
-            "issn": "1537-4456",
-            "title": "Scientific American",
-            "issue": "May 2024",
-            "editor": "Laura Helmuth",
-            "published": "2024-05-01T00:00:00.000Z",
-            "publisher": "Springer Nature",
-            "pages": 96,
-            "description": "Covers the latest developments in science and technology for curious readers.",
-            "website": "https://www.scientificamerican.com/"
-        },
-        {
             "issn": "1527-1821",
             "title": "Wired",
             "issue": "June 2024",
@@ -217,62 +151,6 @@
                 "Tim Robbins",
                 "Morgan Freeman",
                 "Bob Gunton"
-            ]
-        },
-        {
-            "id": "tt1375666",
-            "title": "Inception",
-            "director": "Christopher Nolan",
-            "release_date": "2010-07-16",
-            "duration": 148,
-            "genre": [
-                "Action",
-                "Adventure",
-                "Sci-Fi"
-            ],
-            "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
-            "imdb_url": "https://www.imdb.com/title/tt1375666/",
-            "main_actors": [
-                "Leonardo DiCaprio",
-                "Joseph Gordon-Levitt",
-                "Elliot Page"
-            ]
-        },
-        {
-            "id": "tt0068646",
-            "title": "The Godfather",
-            "director": "Francis Ford Coppola",
-            "release_date": "1972-03-24",
-            "duration": 175,
-            "genre": [
-                "Crime",
-                "Drama"
-            ],
-            "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-            "imdb_url": "https://www.imdb.com/title/tt0068646/",
-            "main_actors": [
-                "Marlon Brando",
-                "Al Pacino",
-                "James Caan"
-            ]
-        },
-        {
-            "id": "tt0468569",
-            "title": "The Dark Knight",
-            "director": "Christopher Nolan",
-            "release_date": "2008-07-18",
-            "duration": 152,
-            "genre": [
-                "Action",
-                "Crime",
-                "Drama"
-            ],
-            "description": "When the menace known as the Joker emerges, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-            "imdb_url": "https://www.imdb.com/title/tt0468569/",
-            "main_actors": [
-                "Christian Bale",
-                "Heath Ledger",
-                "Aaron Eckhart"
             ]
         },
         {
