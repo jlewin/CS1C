@@ -9,13 +9,14 @@
 #include "constants.h"
 #include "LibraryShelf.h"
 
-#include "json.hpp"
+// #include "json.hpp"
+// using json = nlohmann::json;
+//void loadJsonInventory(InventoryManager&);
 
-using json = nlohmann::json;
 using namespace std;
 
 bool getCompartment(const string&, InventoryManager&, int&, int&);
-void loadInventory(InventoryManager&);
+void loadSimpleInventory(InventoryManager& libraryInventory);
 string getDueDate(int days);
 
 int main()
@@ -33,7 +34,9 @@ int main()
     int inc = 1;
 
     InventoryManager libraryInventory;
-    loadInventory(libraryInventory);
+    loadSimpleInventory(libraryInventory);
+    // Disable so that the json dependency is not required (and thus 3rd party libraries)
+    //loadJsonInventory(libraryInventory);
 
     do
     {
@@ -175,46 +178,77 @@ string getDueDate(int days) {
     return dueDate;
 }
 
-void loadInventory(InventoryManager& libraryInventory) {
-    std::ifstream f("data.json");
-    json data = json::parse(f);
+void loadSimpleInventory(InventoryManager& libraryInventory) {
 
-    // Loop over books - `i` is the source index and compartment number
-    for (size_t i = 0; i < data["books"].size(); i++) {
-        auto book = data["books"][i];
+    libraryInventory.addItem(0, 0,
+        new BookItem(
+            "978-3-16-148410-0",        // Mock ISBN
+            "An adventurous journey through programming concepts.", // Mock description
+            "Adventures in C++",        // Mock title
+            "John Doe",                 // Mock author
+            "2024-01-01"));             // Mock published date
 
-        libraryInventory.addItem(0, i,
-            new BookItem(
-                book["isbn"],        // The isbn is a decent item identifier
-                book["description"], 
-                book["title"],
-                book["author"],
-                book["published"]));
-    }
+    libraryInventory.addItem(0, 1,
+        new BookItem(
+            "978-0-13-235088-4",        // Mock ISBN
+            "A practical guide to clean code practices.",           // Mock description
+            "Clean Code",               // Mock title
+            "Robert C. Martin",         // Mock author
+            "2008-08-01"));             // Mock published date
 
-    // Loop over magazines - `i` is the source index and compartment number
-    for (size_t i = 0; i < data["magazines"].size(); i++) {
-        auto magazine = data["magazines"][i];
-        libraryInventory.addItem(1, i,
-            new MagazineItem(
-                magazine["issn"],        // The issn is a decent item identifier
-                magazine["description"], 
-                magazine["title"],
-                magazine["issue"]));
-    }
+    libraryInventory.addItem(0, 2,
+        new BookItem(
+            "978-1-59327-584-6",        // Mock ISBN
+            "An engaging introduction to algorithms.",              // Mock description
+            "The Algorithm Design Manual", // Mock title
+            "Steven S. Skiena",         // Mock author
+            "2020-10-15"));             // Mock published date
 
-    // Loop over movies - `i` is the source index and compartment number
-    for (size_t i = 0; i < data["movies"].size(); i++) {
-        auto movie = data["movies"][i];
+    libraryInventory.addItem(1, 0,
+        new MagazineItem(
+            "1234-5678",        // Mock ISSN
+            "Exploring the latest advancements in AI technology.", // Mock description
+            "AI Monthly",       // Mock title
+            "2024-11"));        // Mock issue
 
-        libraryInventory.addItem(2, i,
-            new MovieItem(
-                movie["id"],
-                movie["description"], 
-                movie["title"],
-                movie["director"],
-                movie["main_actors"].get<vector<string>>()));
-    }
+    libraryInventory.addItem(1, 1,
+        new MagazineItem(
+            "9876-5432",        // Mock ISSN
+            "A deep dive into space exploration and astronomy.",  // Mock description
+            "Cosmos Today",     // Mock title
+            "2024-10"));        // Mock issue
+
+    libraryInventory.addItem(1, 2,
+        new MagazineItem(
+            "1122-3344",        // Mock ISSN
+            "All the trends and tips in modern software development.", // Mock description
+            "Dev Weekly",       // Mock title
+            "2024-09"));        // Mock issue
+
+    libraryInventory.addItem(2, 0,
+        new MovieItem(
+            "MOV12345",           // Mock ID
+            "A thrilling tale of survival on a distant planet.",  // Mock description
+            "Lost in the Stars",  // Mock title
+            "Jane Smith",         // Mock director
+            {"Chris Pine", "Zoe Saldana", "Idris Elba"})); // Mock main actors
+
+    libraryInventory.addItem(2, 1,
+        new MovieItem(
+            "MOV67890",           // Mock ID
+            "An epic battle between humans and AI for the future of Earth.", // Mock description
+            "Machine Wars",       // Mock title
+            "John Carpenter",     // Mock director
+            {"Keanu Reeves", "Scarlett Johansson", "Tom Hardy"})); // Mock main actors
+
+    libraryInventory.addItem(2, 2,
+        new MovieItem(
+            "MOV54321",           // Mock ID
+            "A heartwarming story of a robot learning what it means to be human.", // Mock description
+            "Metal Heart",        // Mock title
+            "Steven Spielberg",   // Mock director
+            {"Hugh Jackman", "Emma Stone", "Morgan Freeman"})); // Mock main actors
+
 }
 
 bool getCompartment(const string& actionTitle, InventoryManager& libraryInventory, int &shelfNumber, int &compartmentNumber) 
@@ -268,3 +302,47 @@ bool getCompartment(const string& actionTitle, InventoryManager& libraryInventor
 
     return true;
 }
+
+/*
+void loadJsonInventory(InventoryManager& libraryInventory) {
+    std::ifstream f("data.json");
+    json data = json::parse(f);
+
+    // Loop over books - `i` is the source index and compartment number
+    for (size_t i = 0; i < data["books"].size(); i++) {
+        auto book = data["books"][i];
+
+        libraryInventory.addItem(0, i,
+            new BookItem(
+                book["isbn"],        // The isbn is a decent item identifier
+                book["description"], 
+                book["title"],
+                book["author"],
+                book["published"]));
+    }
+
+    // Loop over magazines - `i` is the source index and compartment number
+    for (size_t i = 0; i < data["magazines"].size(); i++) {
+        auto magazine = data["magazines"][i];
+        libraryInventory.addItem(1, i,
+            new MagazineItem(
+                magazine["issn"],        // The issn is a decent item identifier
+                magazine["description"], 
+                magazine["title"],
+                magazine["issue"]));
+    }
+
+    // Loop over movies - `i` is the source index and compartment number
+    for (size_t i = 0; i < data["movies"].size(); i++) {
+        auto movie = data["movies"][i];
+
+        libraryInventory.addItem(2, i,
+            new MovieItem(
+                movie["id"],
+                movie["description"], 
+                movie["title"],
+                movie["director"],
+                movie["main_actors"].get<vector<string>>()));
+    }
+}
+*/
