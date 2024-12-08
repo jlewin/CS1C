@@ -135,12 +135,10 @@ int main()
                 if (c1 == nullptr || c2 == nullptr) {
                     notifyMessage = "\033[1;94mOne or more compartments are empty. Please try again.\033[0m";
                 } else {
-                    // Copy to new variable
-                    InventoryItem temp = *c1;
-
-                    // Brute force swap, seems like I'm missing the right approach. Will continue to investigate.
-                    *c1 = *c2;
-                    *c2 = temp;
+                    libraryInventory.swapItems(shelf, compartment, shelfIndex2, compartmentIndex2);
+                    InventoryItem* temp = c1;
+                    c1 = c2;
+                    c2 = temp;
                 }
             }
         }

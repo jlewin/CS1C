@@ -28,15 +28,16 @@ void LibraryShelf::addItem(InventoryItem* item, int index) {
 
 // Operator overloads
 
-// Add subscript operator, returning nullptr for non-existing items
+// Indexer operators
 InventoryItem* LibraryShelf::operator[] (int index) const{
     return compartments[index];
 }
 
-int LibraryShelf::getCompartmentCount() const {
-    return (int) compartments.size();
+InventoryItem*& LibraryShelf::operator[] (int index) {
+    return compartments[index];
 }
 
+// Insertion operator
 ostream& operator<<(ostream& outstream, const LibraryShelf& shelf) {
     outstream << headingText(shelf.name) << endl;
     outstream << separator() << endl;
@@ -66,6 +67,11 @@ ostream& operator<<(ostream& outstream, const LibraryShelf& shelf) {
     outstream << endl;
 
     return outstream;
+}
+
+// Other members
+int LibraryShelf::getCompartmentCount() const {
+    return (int) compartments.size();
 }
 
 int LibraryShelf::getInstanceCount() {

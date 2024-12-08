@@ -16,6 +16,8 @@ class LibraryShelf
         ~LibraryShelf();
 
         InventoryItem* operator[](int index) const;
+        InventoryItem*& operator[](int index);
+
         friend ostream& operator<<(ostream&, const LibraryShelf&);
 
         int getCompartmentCount() const;

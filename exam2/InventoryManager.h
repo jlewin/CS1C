@@ -19,8 +19,11 @@ class InventoryManager
         int getShelfCount() const;
 
         LibraryShelf& operator[](int index) const;
+        LibraryShelf& operator[](int index);
 
         friend ostream& operator<<(ostream&, const InventoryManager&);
+
+        void swapItems(int shelfA, int compartment1, int shelfB, int compartment2);
 
         int static getInstanceCount();
         void addItem(const int shelf, const int compartment, InventoryItem* item);

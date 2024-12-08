@@ -5,6 +5,7 @@ using namespace std;
 
 int InventoryManager::instanceCount = 0;
 
+// Constructor
 InventoryManager::InventoryManager() {
     instanceCount++;
 
@@ -14,6 +15,7 @@ InventoryManager::InventoryManager() {
     }
 }
 
+// Indexer operators
 LibraryShelf& InventoryManager::operator[](int index) const {
     if (index < 0 || index >= getShelfCount()) {
         throw std::out_of_range("Index out of range");
@@ -22,14 +24,15 @@ LibraryShelf& InventoryManager::operator[](int index) const {
     return *libraryShelves[index];
 }
 
-void InventoryManager::addItem(int shelf, int compartment, InventoryItem* item) {
-    libraryShelves[shelf]->addItem(item, compartment);
+LibraryShelf& InventoryManager::operator[](int index) {
+    if (index < 0 || index >= getShelfCount()) {
+        throw std::out_of_range("Index out of range");
+    }
+
+    return *libraryShelves[index];
 }
 
-int InventoryManager::getShelfCount() const {
-    return (int) libraryShelves.size();
-}
-
+// Insertion operator
 ostream& operator<<(ostream& outstream, const InventoryManager& libraryInventory) {
     for (int i = 0; i < libraryInventory.getShelfCount(); i++) {
         // Added for clarity on what's passed to cout below
@@ -40,6 +43,25 @@ ostream& operator<<(ostream& outstream, const InventoryManager& libraryInventory
     return outstream;
 }
 
+// Other Members
+void InventoryManager::addItem(int shelf, int compartment, InventoryItem* item) {
+    libraryShelves[shelf]->addItem(item, compartment);
+}
+
+int InventoryManager::getShelfCount() const {
+    return (int) libraryShelves.size();
+}
+
 int InventoryManager::getInstanceCount() {
     return instanceCount;
+}
+
+void InventoryManager::swapItems(int shelfIndexA, int compartmentA, int shelfIndexB, int compartmentB) {
+
+    LibraryShelf& shelfA = (*libraryShelves[shelfIndexA]);
+    LibraryShelf& shelfB = (*libraryShelves[shelfIndexB]);
+
+    InventoryItem* temp = shelfA[compartmentA];
+    shelfA[compartmentA] = shelfB[compartmentB];
+    shelfB[compartmentB] = temp;
 }
