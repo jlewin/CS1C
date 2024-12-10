@@ -22,7 +22,9 @@ class PosSystem
         void listMenuItems() const;
 
         void addMenuItem(const string& name, double cost, double salePrice);
-
+        CustomerOrder* addOrder(const string& customerName);
+        void addOrderItem(CustomerOrder* order, const string& name, int quantity);
+        const MenuItem* getMenuItem(const string& name) const;
 
     private:
         vector<CustomerOrder*> orders;

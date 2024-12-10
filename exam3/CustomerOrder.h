@@ -9,8 +9,8 @@ class CustomerOrder
 {
     public:
         CustomerOrder(string);
-        friend ostream& operator<<(ostream&, const CustomerOrder&);
-        void addItem(const MenuItem&, int);
+        friend ostream& operator<<(ostream&, const CustomerOrder*);
+        void addItem(const MenuItem*, int);
 
     private:
         vector<LineItem*> lineItems;

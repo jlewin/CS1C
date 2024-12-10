@@ -8,6 +8,7 @@ public:
     void initAppState(PosSystem& posSystem);
 private:
     void loadMenu(PosSystem& posSystem);
+    void loadOrders(PosSystem& posSystem);
 };
 
 #endif

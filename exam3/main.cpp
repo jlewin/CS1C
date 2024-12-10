@@ -37,9 +37,6 @@ int main()
     char choice = ' ';
     string notifyMessage = "";
 
-    // Increment var
-    int inc = 1;
-
     PosSystem posSystem;
 
     MockState mockState;
@@ -74,8 +71,6 @@ int main()
 
         // Initialize the error condition
         choiceValid = true;
-        int shelf = -1;
-        int compartment = -1;
                 
         // Collect user input and update exit condition variable
         switch (choice = getMenuChoice())
@@ -87,6 +82,9 @@ int main()
             break;
         }
         case '2':
+            posSystem.listOrders();
+            pauseForEnter();
+            break;
         case '3':
         {
             
