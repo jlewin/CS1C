@@ -6,7 +6,7 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-g",
-                "-DLOG_VERBOSE",
+                "-DLOG_VERBOSE_OFF",
                 "-fdiagnostics-color=always",
                 "-std=c++20",
                 "-Wall",
