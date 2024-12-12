@@ -1,22 +1,10 @@
-// Constants.h
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+// constants.h
+#ifndef Constants_H
+#define Constants_H
 
-const int MAX_COMPARTMENTS = 15;
+#include <string>
 
-class FormattingOptions {
-    public:
-        static FormattingOptions& getInstance() {
-            static FormattingOptions instance;
-            return instance;
-        }
+const std::string indentText = "  │ ";
+const int titleWidth = 16;
 
-        bool showEmptyCompartments = false;
-        bool showCheckedOutOnly = true;
-        bool showAllItems = false;
-        bool showCheckedInOnly = false;
-    private:
-        FormattingOptions() = default; // Private constructor
-};
-
-#endif // CONSTANTS_H
+#endif

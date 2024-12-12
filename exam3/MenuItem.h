@@ -9,11 +9,10 @@ using namespace std;
 class MenuItem
 {
     public:
+        MenuItem();
         MenuItem(string name, double cost, double salePrice);
-
-        // Virtual functions
-        virtual ~MenuItem();
-        virtual void print(ostream& os) const;
+        ~MenuItem();
+        void print(ostream& os) const;
 
         string getName() const;
         double getCost() const;
@@ -25,14 +24,9 @@ class MenuItem
         void setSalePrice(double);
 
         friend ostream& operator<<(ostream&, const MenuItem&);
-
-        static void setIndentText(string);
         static int getInstanceCount();
-        string indent() const;
-        static int titleWidth;
-        
+
     private:
-        static string indentText;
         static int instanceCount;
         string name;
         double cost;

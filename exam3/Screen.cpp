@@ -62,24 +62,22 @@ void pauseForEnter()
 void clearScreen()
 {
     // See - https://stackoverflow.com/a/32008479/84369
-    cout << "\033[2J\033[1;1H";
+   // cout << "\033[2J\033[1;1H";
 }
 
-void initMenu(const string& title)
+void showHeading(const string& title, string indent)
 {
     clearScreen();
 
     cout << titleText(title) << endl;
-    printSeparator();
+    printSeparator(indent);
 }
 
-string separator() {
-    return "───────────────────────────────────────────────────────────────"
-            "──────────────────────────────────────────";
+string separator(string indent) {
+    return indent + "─────────────────────────────────────────────────────────────────────────────";
 }
 
-void printSeparator()
-{
-    cout << separator() << endl;
+void printSeparator(string indent) {
+    cout << separator(indent) << endl;
 }
 

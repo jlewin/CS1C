@@ -7,18 +7,21 @@ class LineItem
 {
     public:
         LineItem(const MenuItem& menuItem, int quantity);
+        ~LineItem();
         friend ostream& operator<<(ostream&, const LineItem*);
         static int getInstanceCount();
-        string indent() const;
-        
+        string getName() const;
+
+        double getCost() const;
+        double getPrice() const;
+        double getProfit() const;
+
     private:
-        static int titleWidth;
-        static string indentText;
         static int instanceCount;
         void print(ostream&) const;
 
     private:
-        MenuItem menuItem;
+        const MenuItem& menuItem;
         int quantity;
 };
 

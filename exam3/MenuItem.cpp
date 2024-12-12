@@ -1,25 +1,31 @@
 #include <iostream>
 #include <iomanip>
 #include "MenuItem.h"
+#include "constants.h"
 
 using namespace std;
 
 int MenuItem::instanceCount = 0;
-string MenuItem::indentText = "    │ ";
-int MenuItem::titleWidth = 16;
+
+MenuItem::MenuItem() {
+    instanceCount++;
+    cout << "Creating empty MenuItem (" << instanceCount << ")" << endl;
+}
 
 MenuItem::MenuItem(string name, double cost, double salePrice)
     : name(name), cost(cost), salePrice(salePrice)
  {
     instanceCount++;
+    cout << "Creating MenuItem for " << name << " (" << instanceCount << ")" << endl;
  }
 
  MenuItem::~MenuItem() {
-        instanceCount--;
+    cout << "   Destroying MenuItem for " << name << "(" << instanceCount << ")" << endl;
+    instanceCount--;
  }
 
 string MenuItem::getName() const {
-    return name;    
+    return name;
 }
 
 double MenuItem::getCost() const {
@@ -48,19 +54,11 @@ void MenuItem::setSalePrice(double salePrice) {
 
 void MenuItem::print(std::ostream& os) const {
     os << left
-       << setprecision(2) << fixed 
-       << indent() << setw(titleWidth) << "Name" << getName() << endl
-       << indent() << setw(titleWidth) << "Cost" << "$" << getCost() << endl
-       << indent() << setw(titleWidth) << "Sale Price" << "$" << getSalePrice() << endl
-       << indent() << setw(titleWidth) << "Profit" << "$" << getItemProfit() << endl;
-}
-
-void MenuItem::setIndentText(string text) {
-    indentText = text;
-}
-
-string MenuItem::indent() const {
-    return indentText;
+       << setprecision(2) << fixed
+       << indentText << setw(titleWidth) << "Name" << getName() << endl
+       << indentText << setw(titleWidth) << "Cost" << "$" << getCost() << endl
+       << indentText << setw(titleWidth) << "Sale Price" << "$" << getSalePrice() << endl
+       << indentText << setw(titleWidth) << "Profit" << "$" << getItemProfit() << endl;
 }
 
 ostream& operator<<(ostream& outstream, const MenuItem &item) {

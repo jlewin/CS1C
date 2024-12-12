@@ -3,16 +3,21 @@
 
 #include "LineItem.h"
 #include "LineItem.h"
+#include "constants.h"
 
 using namespace std;
 
 int LineItem::instanceCount = 0;
-string LineItem::indentText = "    │ ";
-int LineItem::titleWidth = 16;
 
 LineItem::LineItem(const MenuItem& menuItem, int quantity) 
     : menuItem(menuItem), quantity(quantity) {
         instanceCount++;
+        cout << "Creating LineItem for " << menuItem.getName() << " (" << instanceCount << ")" << endl;
+}
+
+LineItem::~LineItem() {
+    cout << "  Destroying LineItem for " << menuItem.getName() << "(" << instanceCount << ")" << endl;
+    instanceCount--;
 }
 
 // Insertion operator
@@ -21,15 +26,26 @@ ostream& operator<<(ostream& outstream, const LineItem* lineItem) {
     return outstream;
 }
 
+string LineItem::getName() const {
+    return menuItem.getName();
+}
+
+double LineItem::getCost() const {
+    return menuItem.getCost() * quantity;
+}
+
+double LineItem::getPrice() const {
+    return menuItem.getSalePrice() * quantity;
+}
+
+double LineItem::getProfit() const {
+    return (getPrice() - getCost());
+}
 
 void LineItem::print(std::ostream& os) const {
     os << left
-       << indent() << setw(titleWidth)
+       << indentText << setw(titleWidth)
        << menuItem.getName() << "("  << quantity << ")" << endl; 
-}
-
-string LineItem::indent() const {
-    return indentText;
 }
 
 int LineItem::getInstanceCount() {
