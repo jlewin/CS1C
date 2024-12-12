@@ -21,6 +21,7 @@ class CustomerOrder
         }
 
     private:
+        static int instanceCount;
         vector<LineItem*> lineItems;
         string customerName;
 };

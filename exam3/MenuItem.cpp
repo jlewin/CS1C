@@ -7,21 +7,18 @@ using namespace std;
 
 int MenuItem::instanceCount = 0;
 
-MenuItem::MenuItem() {
-    instanceCount++;
-    cout << "Creating empty MenuItem (" << instanceCount << ")" << endl;
-}
-
 MenuItem::MenuItem(string name, double cost, double salePrice)
     : name(name), cost(cost), salePrice(salePrice)
  {
-    instanceCount++;
-    cout << "Creating MenuItem for " << name << " (" << instanceCount << ")" << endl;
+    #ifdef LOG_VERBOSE
+        cout << "Creating MenuItem for " << name << " (" << instanceCount++ << ")" << endl;
+    #endif
  }
 
  MenuItem::~MenuItem() {
-    cout << "   Destroying MenuItem for " << name << "(" << instanceCount << ")" << endl;
-    instanceCount--;
+    #ifdef LOG_VERBOSE
+        cout << "   Destroying MenuItem for " << name << "(" << --instanceCount << ")" << endl;
+    #endif
  }
 
 string MenuItem::getName() const {

@@ -11,13 +11,15 @@ int LineItem::instanceCount = 0;
 
 LineItem::LineItem(const MenuItem& menuItem, int quantity) 
     : menuItem(menuItem), quantity(quantity) {
-        instanceCount++;
-        cout << "Creating LineItem for " << menuItem.getName() << " (" << instanceCount << ")" << endl;
+    #ifdef LOG_VERBOSE
+        cout << "Creating LineItem for " << menuItem.getName() << " (" << instanceCount++ << ")" << endl;
+    #endif
 }
 
 LineItem::~LineItem() {
-    cout << "  Destroying LineItem for " << menuItem.getName() << "(" << instanceCount << ")" << endl;
-    instanceCount--;
+    #ifdef LOG_VERBOSE
+        cout << "  Destroying LineItem for " << menuItem.getName() << "(" << --instanceCount << ")" << endl;
+    #endif
 }
 
 // Insertion operator

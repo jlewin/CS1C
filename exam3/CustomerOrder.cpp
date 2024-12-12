@@ -1,14 +1,23 @@
 #include <iostream>
 #include "CustomerOrder.h"
 
+int CustomerOrder::instanceCount = 0;
+
 // Constructor
 CustomerOrder::CustomerOrder(string customerName) {
+    #ifdef LOG_VERBOSE
+        cout << "Creating order for " << customerName << " (" << instanceCount++ << ")" << endl;
+    #endif
+
     this->customerName = customerName;
 }
 
 // Destructor
 CustomerOrder::~CustomerOrder() {
-    cout << "Destroying order for " << customerName << endl;
+    #ifdef LOG_VERBOSE
+        cout << "Destroying order for " << customerName << " (" << --instanceCount << ")" << endl;
+    #endif
+
 
     for (size_t i = 0; i < lineItems.size(); i++) {
         delete lineItems[i];
