@@ -16,6 +16,7 @@ class PosSystem
         // Reporting functions - assume primary out is console (consider passing ostream for more control)
         void listOrders() const;
         void listMenuItems() const;
+        void printMenu() const;
         double getDailySalesCosts() const;
         double getDailySalesRevenue() const;
         double getDailySalesProfit() const;

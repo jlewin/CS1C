@@ -83,9 +83,29 @@ void PosSystem::listMenuItems() const {
     showHeading("Menu Items", "──┬─");
 
     for (size_t i = 0; i < menu.size(); i++) {
-        cout << menu[i];
+        cout << *menu[i];
         printSeparator(i == menu.size() - 1 ? "  └─" : "  ├─");
     }
+}
+
+void PosSystem::printMenu() const {
+    // Output report heading
+    showHeading("Menu Items", "──┬─");
+
+    cout << indentText << setw(titleWidth) << "Name"
+       << setw(titleWidth) << "Cost"
+       << setw(titleWidth) << "Sale Price"
+       << setw(titleWidth) << "Profit" << endl;
+
+    for (size_t i = 0; i < menu.size(); i++) {
+        cout << indentText << setw(titleWidth) << menu[i]->getName()
+            << setw(titleWidth) << menu[i]->getCost()
+            << setw(titleWidth) <<  menu[i]->getSalePrice()
+            << setw(titleWidth) <<  menu[i]->getItemProfit() << endl;
+    }
+
+    printSeparator("  └─");
+
 }
 
 void PosSystem::listOrders() const {

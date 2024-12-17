@@ -77,6 +77,19 @@ int main()
             posSystem.listOrders();
             pauseForEnter();
             break;
+        case '3':
+        {
+            clearScreen();
+            string customerName;
+            showHeading("Add Order");
+            cout << "Enter customer name: ";
+            cin >> customerName;
+
+            posSystem.printMenu();
+            pauseForEnter();
+            break;
+        }
+
         case '4':
         {
             // Output report heading
