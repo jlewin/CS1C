@@ -62,12 +62,13 @@ void pauseForEnter()
 void clearScreen()
 {
     // See - https://stackoverflow.com/a/32008479/84369
-    cout << "\033[2J\033[1;1H";
+    //cout << "\033[2J\033[1;1H";
 }
 
-void showHeading(const string& title, string indent)
-{
-    clearScreen();
+void showHeading(const string& title, string indent, bool clearScreenFlag) {
+    if (clearScreenFlag) {
+        clearScreen();
+    }
 
     cout << titleText(title) << endl;
     printSeparator(indent);

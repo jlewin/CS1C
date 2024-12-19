@@ -89,19 +89,21 @@ void PosSystem::listMenuItems() const {
 }
 
 void PosSystem::printMenu() const {
-    // Output report heading
-    showHeading("Menu Items", "──┬─");
 
-    cout << indentText << setw(titleWidth) << "Name"
-       << setw(titleWidth) << "Cost"
-       << setw(titleWidth) << "Sale Price"
-       << setw(titleWidth) << "Profit" << endl;
+    int indentWidth = 4; // indentText.length(); <-- Unicode character are not accounted for in .length()
+    int rightColumnWidth = 7;
+    int colWidths[] = {79-indentWidth-rightColumnWidth, rightColumnWidth};
+
+    // Output report heading
+    showHeading("\nMenu Items", "──┬─", false);
+
+    cout << left << setprecision(2) << fixed
+         << indentText << setw(colWidths[0]) << "Item" << setw(colWidths[1]) << "Price" << endl;
 
     for (size_t i = 0; i < menu.size(); i++) {
-        cout << indentText << setw(titleWidth) << menu[i]->getName()
-            << setw(titleWidth) << menu[i]->getCost()
-            << setw(titleWidth) <<  menu[i]->getSalePrice()
-            << setw(titleWidth) <<  menu[i]->getItemProfit() << endl;
+        cout << left << setfill('.') << indentText << setw(colWidths[0])
+            << (to_string(i + 1) + ". " + menu[i]->getName())
+            << "$" << right << setfill(' ') << setw(colWidths[1]) << menu[i]->getSalePrice() << endl;
     }
 
     printSeparator("  └─");
@@ -109,9 +111,33 @@ void PosSystem::printMenu() const {
 }
 
 void PosSystem::listOrders() const {
+
+    int indentWidth = 4; // indentText.length(); <-- Unicode character are not accounted for in .length()
+    int rightColumnWidth = 7;
+    int colWidths[] = {4, 75-indentWidth-rightColumnWidth, rightColumnWidth};
+
+    // Loop over orders
     for (size_t i = 0; i < orders.size(); i++) {
-        cout << orders[i];
-        cout << "---------------------" << endl;
+
+        // Output report heading
+        showHeading("\nOrder for " + orders[i]->getCustomerName() , "──┬─", false);
+        auto items = orders[i]->getLineItems();
+
+        for (size_t i = 0; i < items.size(); i++) {
+            auto lineItem = items[i];
+
+            cout << left << indentText << setfill(' ') << setw(colWidths[0]) << ("(" + to_string(lineItem->getQuantity()) + ")")
+                << setfill('.') << setw(colWidths[1]) << lineItem->getName()
+                << "$" << right << setfill(' ') << setw(colWidths[2]) << lineItem->getPrice() << endl;
+        }
+
+        printSeparator("  └─");
+
+        cout << string(indentWidth, ' ') << left
+            << setfill('.') << setw(colWidths[0] + colWidths[1]) << "Total"
+            << "$"
+            << setfill(' ') << setw(colWidths[2]) << right << orders[i]->getTotalRevenue() << endl;
+
     }
 }
 

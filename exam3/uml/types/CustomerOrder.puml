@@ -1,0 +1,20 @@
+@startuml
+!include LineItem.puml
+
+class CustomerOrder {
+    +CustomerOrder(string customerName)
+    +~CustomerOrder()
+    +void addItem(const MenuItem* menuItem, int quantity)
+    +string getCustomerName() const
+    +double getTotalCost() const
+    +double getTotalRevenue() const
+    +double getTotalProfit() const
+    +const vector<LineItem*>& getLineItems() const
+    +friend ostream& operator<<(ostream&, const CustomerOrder*)
+    -static int instanceCount
+    -vector<LineItem*> lineItems
+    -string customerName
+}
+
+CustomerOrder *-- LineItem : owns
+@enduml

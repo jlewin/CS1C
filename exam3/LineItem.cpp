@@ -28,6 +28,10 @@ ostream& operator<<(ostream& outstream, const LineItem* lineItem) {
     return outstream;
 }
 
+int LineItem::getQuantity() const {
+    return quantity;
+}
+
 string LineItem::getName() const {
     return menuItem.getName();
 }

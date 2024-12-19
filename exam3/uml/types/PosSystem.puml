@@ -1,0 +1,29 @@
+@startuml
+
+!include LineItem.puml
+!include CustomerOrder.puml
+
+class PosSystem {
+    +PosSystem()
+    +~PosSystem()
+    +void listOrders() const
+    +void listMenuItems() const
+    +void printMenu() const
+    +double getDailySalesCosts() const
+    +double getDailySalesRevenue() const
+    +double getDailySalesProfit() const
+    +vector<double> getDailyItemProfits() const
+    +CustomerOrder* addOrder(const string& customerName)
+    +void addOrderItem(CustomerOrder* order, const string& name, int quantity)
+    +void addMenuItem(const string& name, double cost, double salePrice)
+    +const MenuItem* getMenuItem(const string& name) const
+    +const MenuItem* getMenuItem(const int index) const
+    +int getMenuItemIndex(const string& name) const
+    +friend ostream& operator<<(ostream&, const PosSystem&)
+    -vector<CustomerOrder*> orders
+    -vector<MenuItem*> menu
+}
+
+PosSystem *--  CustomerOrder : owns
+PosSystem *--  MenuItem : owns
+@enduml

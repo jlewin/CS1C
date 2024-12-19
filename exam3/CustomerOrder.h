@@ -12,6 +12,7 @@ class CustomerOrder
         ~CustomerOrder();
         friend ostream& operator<<(ostream&, const CustomerOrder*);
         void addItem(const MenuItem*, int);
+        string getCustomerName() const;
         double getTotalCost() const;
         double getTotalRevenue() const;
         double getTotalProfit() const;

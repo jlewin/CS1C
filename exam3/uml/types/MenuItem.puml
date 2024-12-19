@@ -1,0 +1,21 @@
+@startuml
+class MenuItem {
+    +MenuItem()
+    +MenuItem(string name, double cost, double salePrice)
+    +~MenuItem()
+    +string getName() const
+    +double getCost() const
+    +double getSalePrice() const
+    +double getItemProfit() const
+    +void setName(string name)
+    +void setCost(double cost)
+    +void setSalePrice(double salePrice)
+    +void print(ostream& os) const
+    +friend ostream& operator<<(ostream&, const MenuItem&)
+    +static int getInstanceCount()
+    -static int instanceCount
+    -string name
+    -double cost
+    -double salePrice
+}
+@enduml

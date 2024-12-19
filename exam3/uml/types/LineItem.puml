@@ -1,0 +1,22 @@
+@startuml
+!include MenuItem.puml
+
+class LineItem {
+    +LineItem(const MenuItem& menuItem, int quantity)
+    +~LineItem()
+    +string getName() const
+    +int getQuantity() const
+    +double getCost() const
+    +double getPrice() const
+    +double getProfit() const
+    +static int getInstanceCount()
+    +friend ostream& operator<<(ostream&, const LineItem*)
+    -void print(ostream&) const
+    -static int instanceCount
+    -const MenuItem& menuItem
+    -int quantity
+}
+
+LineItem --> MenuItem : contains
+
+@enduml

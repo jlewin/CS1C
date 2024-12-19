@@ -12,6 +12,8 @@ class LineItem
         static int getInstanceCount();
         string getName() const;
 
+        int getQuantity() const;
+
         double getCost() const;
         double getPrice() const;
         double getProfit() const;

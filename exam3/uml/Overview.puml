@@ -1,0 +1,9 @@
+@startuml Overview
+skinparam classAttributeIconSize 0
+
+!include types/MenuItem.puml
+!include types/LineItem.puml
+!include types/PosSystem.puml
+!include types/CustomerOrder.puml
+
+@enduml
